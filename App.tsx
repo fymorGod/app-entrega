@@ -1,20 +1,27 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import * as React from 'react';
+
+import { NavigationContainer } from '@react-navigation/native';
+import { RootNavigator } from './src/routes/RootNavigator';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { SplashScreen } from './SplashScreenView';
 
 export default function App() {
+  const [isShowSplash, setIsShowSplash] = React.useState<boolean>(true);
+  
+  React.useEffect(() => {
+    setTimeout(() => {
+      setIsShowSplash(true)
+    }, 2000)
+  }, []);
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <SafeAreaProvider>
+      {
+        isShowSplash ? <SplashScreen /> : 
+         <NavigationContainer>
+            <RootNavigator />
+          </NavigationContainer>
+      }
+    </SafeAreaProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
