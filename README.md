@@ -6,6 +6,22 @@
 ```bash
     $ cd app-entrega/src/docs
 ```
+> **Como rodar**: Para instanciar o projeto se faz necessário o NodeJs.
+
+Segue os requisitos necessários e suas versões:
+- **Node JS** 📄 ______v20.17.0
+- **React** 🚚 ________18.2.0
+- **Expo** __________ ~51.0.28
+
+```bash
+    $ npm i
+    $ npx expo start 
+```
+> **Clean cache**: Para instanciar o projeto se faz necessário o NodeJs.
+
+```bash
+    $  npm start -- --reset-cache 
+```
 
 Este projeto visa otimizar as entregas diárias ao fornecer uma interface prática e intuitiva para escanear romaneios, listar clientes e apresentar informações detalhadas de cada entrega, como status e endereço.
 
