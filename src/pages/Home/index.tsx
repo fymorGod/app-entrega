@@ -15,10 +15,11 @@ type FormData = {
     romaneio: string;
 }
 
-export function Home() {
+export function HomePage() {
     const { handleSubmit, control, formState: { errors } } = useForm<FormData>();
     const [isInputFocused, setIsInputFocused] = useState<boolean>(false);
     const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>()
+    
     const pesquisar = () => {
         navigation.navigate('Camera', { title: 'Scanear ' })
     }

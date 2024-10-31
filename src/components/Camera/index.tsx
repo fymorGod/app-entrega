@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import { CameraView, useCameraPermissions } from "expo-camera"
 import { Text, View } from "react-native"
 import { styles } from "./styles";
-import type { RouteProp } from "@react-navigation/native";
+import { useNavigation, type RouteProp } from "@react-navigation/native";
 import type { BarCodeScannerResult } from "expo-barcode-scanner";
 import { Modal } from "../Modal";
+import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import type { RootStackParamList } from "../../routes/RootNavigator";
 
 interface CameraCodProdutoProps {
     route: RouteProp<{
@@ -17,6 +19,7 @@ export const Camera = ({ route }: CameraCodProdutoProps) => {
     const [status, requestPermission] = useCameraPermissions();
     const [codigoDeBarras, setCodigoDeBarras] = useState<string>("");
     const [openModal, setVisibleModal] = useState<boolean>(false);
+    const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>()
 
     if (!status) {
         return <View><Text>Solicitando permissão de câmera...</Text></View>;
@@ -39,6 +42,7 @@ export const Camera = ({ route }: CameraCodProdutoProps) => {
 
     const handleScan = (data: BarCodeScannerResult) => {
         setCodigoDeBarras(data.data)
+        navigation.replace('Clientes');
     }
 
     return (
