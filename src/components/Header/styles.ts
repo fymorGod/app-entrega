@@ -4,22 +4,22 @@ export const styles = StyleSheet.create({
     header: {
         width: '100%',
         height: 100,
-        paddingTop: 10,
+        paddingTop: 20,
         flexDirection: 'row',
         alignItems: 'center',
     },
     iconRight : {
         flex: 1,
         position: 'absolute',
-        right: 25,
-        top: 40,
+        right: 20,
+        top: 45,
         color: "#fff"
     },
     iconLeft : {
         flex: 1,
         position: 'absolute',
-        left: 25,
-        top: 40,
+        left: 30,
+        top: 45,
         color: "#fff"
     },
     textHeader: {
