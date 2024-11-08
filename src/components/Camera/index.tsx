@@ -54,11 +54,9 @@ export const Camera = ({ route }: CameraCodProdutoProps) => {
             }}
             pictureSize={"1920x1080"}
         >
-            <Text style={styles.title}>{title}</Text>
             <View style={styles.scannerOverlay} />
             <View style={styles.scannerBorderTop} />
             <View style={styles.scannerBorderBottom} />
-            <Text style={styles.textRomaneioInfo}>Romaneio {codigoDeBarras}</Text>
         </CameraView>
     )
 }

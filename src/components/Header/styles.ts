@@ -4,29 +4,37 @@ export const styles = StyleSheet.create({
     header: {
         width: '100%',
         height: 100,
-        paddingTop: 20,
+        paddingTop: 25,
+        paddingHorizontal: 20,
         flexDirection: 'row',
         alignItems: 'center',
+        justifyContent: 'space-between',
     },
-    iconRight : {
+    boxIconLeft: {
+        padding: 10,
         flex: 1,
-        position: 'absolute',
-        right: 20,
-        top: 45,
-        color: "#fff"
+        marginRight: 10
     },
-    iconLeft : {
-        flex: 1,
-        position: 'absolute',
-        left: 30,
-        top: 45,
-        color: "#fff"
+    textHeaderContainer: {
+        flex: 3,
+        justifyContent: 'center',
+        alignItems: 'center',
     },
     textHeader: {
-        flex: 1,
         color: '#fff',
         fontWeight: '500',
         fontSize: 24,
-        textAlign: 'center'
+        textAlign: 'center',
     },
-})
+    boxIconRight: {
+        padding: 10,
+        flex: 1,
+        alignItems: 'flex-end',
+    },
+    iconRight: {
+        color: "#fff",
+    },
+    iconLeft: {
+        color: "#fff",
+    },
+});
