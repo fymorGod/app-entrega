@@ -41,7 +41,7 @@ export function HomePage() {
                                 <Controller
                                     control={control}
                                     name="romaneio"
-                                    rules={{ required: "Username obrigatório" }}
+                                    rules={{ required: "Romaneio obrigatório" }}
                                     render={({ field: { value, onChange } }) => (
                                         <View style={styles.inputContainer}>
                                             {errors.romaneio && (
@@ -49,7 +49,7 @@ export function HomePage() {
                                             )}
                                             <TextInput
                                                 style={styles.input}
-                                                placeholder="Digite seu usuário"
+                                                placeholder="Número do romaneio"
                                                 autoCapitalize='none'
                                                 onChangeText={onChange}
                                                 value={value}
@@ -73,7 +73,7 @@ export function HomePage() {
                                 start={{ x: 0, y: 2 }}
                                 end={{ x: 1, y: -2 }}
                                 style={styles.btnBuscar}>
-                                <Pressable onPress={() => { }}>
+                                <Pressable onPress={handleSubmit(pesquisar)}>
                                     <Text style={styles.textBuscar}>Buscar</Text>
                                 </Pressable>
                             </LinearGradient>

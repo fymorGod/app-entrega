@@ -1,10 +1,14 @@
 import React from "react";
 import Logo from '../../../assets/Logo.png';
 import PotiguarLogo from '../../../assets/potiguar-logo.png';
-
 import { Image } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import Animated, { FadeInRight, useAnimatedStyle, useSharedValue, withRepeat, withTiming } from "react-native-reanimated";
+import Animated, { 
+    FadeInRight, 
+    useAnimatedStyle, 
+    useSharedValue, 
+    withRepeat, 
+    withTiming } from "react-native-reanimated";
 import { styles } from "./styles";
 
 export const SplashScreen = () => {
