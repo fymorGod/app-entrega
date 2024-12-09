@@ -2,10 +2,6 @@ import React from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { styles } from "./styles";
-import { useNavigation } from "@react-navigation/native";
-import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
-import type { RootStackParamList } from "../../routes/RootNavigator";
-
 interface DeliveryCardProps {
     deliveryOrder: number;
     status: string;
@@ -26,12 +22,13 @@ export const DeliveryCard: React.FC<DeliveryCardProps> = ({
     let gradientColors: [string, string, string];
 
     if (status === "T") {
-        gradientColors = ['#1ced26', '#34C94A', '#0F8120']; // Cores verdes
+        gradientColors = ['#1ced26', '#34C94A', '#0F8120'];
     } else if (status === "P") {
-        gradientColors = ['#EFCD0F', '#eecc0b', '#EA6C1E']; // Cores amarelas
+        gradientColors = ['#EFCD0F', '#eecc0b', '#EA6C1E'];
     } else {
-        gradientColors = ['#ED1C24', '#ec060e', '#760000']; // Cores vermelhas
+        gradientColors = ['#ED1C24', '#ec060e', '#760000'];
     }
+    
     const getStatusText = (status: string) => {
         switch (status) {
             case "T":
@@ -58,11 +55,12 @@ export const DeliveryCard: React.FC<DeliveryCardProps> = ({
         }
     };
     return (
+        <View style={[styles.borderWrapper, { borderColor }]}>
             <LinearGradient
                 start={{ x: 0, y: 0 }}
                 end={{ x: 1, y: 0 }}
                 colors={gradientColors}
-                style={[styles.cardInfo, { borderColor }]}
+                style={styles.cardInfo}
             >
                 <View style={styles.wrapperInfo}>
                     <View style={styles.ordem}>
@@ -84,5 +82,6 @@ export const DeliveryCard: React.FC<DeliveryCardProps> = ({
                     </View>
                 </View>
             </LinearGradient>
+        </View>
     );
 };

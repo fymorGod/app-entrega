@@ -1,12 +1,16 @@
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
-    cardInfo: {
+    borderWrapper: {
         borderWidth: 2,
+        borderRadius: 12,
+        overflow: "hidden",
+        marginVertical: 8,
+    },
+    cardInfo: {
+        flex: 1,
         borderRadius: 10,
         padding: 16,
-        marginVertical: 8,
-        zIndex: -1
     },
     wrapperInfo: {
         flexDirection: 'column',

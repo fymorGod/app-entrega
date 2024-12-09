@@ -6,7 +6,6 @@ import { styles } from './styles';
 import { DeliveryCard } from '../../components/DeliveryCard';
 import Animated, { FadeInDown, FadeInRight, FadeOutDown, FadeOutRight } from 'react-native-reanimated';
 import { useSalesStore } from '../../store/vendaStore';
-import type { GroupedByCpf } from '../../interfaces/intefaces';
 import { useNavigation } from '@react-navigation/native';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import type { RootStackParamList } from '../../routes/RootNavigator';
@@ -15,14 +14,6 @@ interface HeaderProps {
     primary: React.ComponentProps<typeof FontAwesome5>['name'];
     secondary?: React.ComponentProps<typeof FontAwesome5>['name'];
 }
-
-const deliveriesData = [
-    { id: '1', ordem: '1ª', status: 'Entregue', nomeCliente: 'Eduardo Henrique Castro Mendes', bairro: 'Trizedela da maioba' },
-    { id: '2', ordem: '2ª', status: 'Em trânsito', nomeCliente: 'João Silva', bairro: 'Centro' },
-    { id: '3', ordem: '3ª', status: 'Pendente', nomeCliente: 'Maria Souza', bairro: 'Jardim América' },
-    { id: '4', ordem: '4ª', status: 'Pendente', nomeCliente: 'Maria Souza', bairro: 'Jardim América' },
-    { id: '5', ordem: '5ª', status: 'Pendente', nomeCliente: 'Maria Souza', bairro: 'Jardim América' },
-];
 
 export const ClientePage = () => {
     const [tooltipVisible, setTooltipVisible] = useState(false);
@@ -33,9 +24,9 @@ export const ClientePage = () => {
         setTooltipVisible(!tooltipVisible);
     };
     const handlePress = (clientCpf: string) => {
-        const selectedClient = salesData?.find(
-            (group: GroupedByCpf) => group.cpf === clientCpf
-        );
+        // const selectedClient = salesData?.find(
+        //     (group: GroupedByCpf) => group.cpf === clientCpf
+        // );
         navigation.navigate('Vendas', { cpf: clientCpf });
         // if (selectedClient) {
         //     console.log('Dados do Cliente Selecionado:', selectedClient.vendas);
@@ -49,6 +40,7 @@ export const ClientePage = () => {
         if (shift === 'T') return 'Tarde';
         return 'Desconhecido';
     };
+
     return (
         <View style={styles.container}>
             <Header primary={'arrow-left'} secondary={'cloud-download-alt'} title='Clientes' />
@@ -79,7 +71,6 @@ export const ClientePage = () => {
                 <TouchableOpacity onPress={toggleTooltip}>
                     <FontAwesome5 name={"users"} size={32} style={styles.iconRight} />
                 </TouchableOpacity>
-
 
                 {tooltipVisible && (
                     <Animated.View
