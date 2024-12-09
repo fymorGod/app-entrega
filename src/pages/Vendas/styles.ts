@@ -2,22 +2,33 @@ import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
     container: {
-        flex: 1
-    },
-    containerCardInfo: {
         flex: 1,
-        marginTop: 10,
-        padding: 10,
-        backgroundColor: 'rgba(254, 241, 187, 0.6)'
+        backgroundColor: '#fff'
+    },
+    listContent: {
+        padding: 10, 
+        marginTop: 5,
+        shadowColor: "#0e141c",
+        shadowOffset: { width: 0, height: 1 },
+        shadowOpacity: 0.12,
+        shadowRadius: 3.84,
+        elevation: 5,
     },
     boxVendedorInfo: {
         width: '100%',
         height: 80,
         padding: 20,
         flexDirection: 'row',
-        backgroundColor: '#f2f2ff',
+        backgroundColor: '#fff',
         borderTopWidth: 1,
-        borderTopColor: 'rgba(254, 241, 187, 0.8)'
+        borderTopColor: 'rgba(220, 0, 0, 0.8)',
+        borderBottomWidth: 1,
+        borderBottomColor: 'rgba(220, 0, 0, 0.8)',
+        shadowColor: "#0e141c",
+        shadowOffset: { width: 0, height: 1 },
+        shadowOpacity: 0.12,
+        shadowRadius: 3.84,
+        elevation: 5,
     },
     infoNotRequestsText: {
         fontSize: 18,

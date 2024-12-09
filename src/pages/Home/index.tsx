@@ -10,6 +10,10 @@ import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
 import type { RootStackParamList } from "../../routes/RootNavigator";
 import { AppVersion } from "../../components/AppVersion";
 import { LogoComponent } from "../../components/LogoComponent";
+import { api } from "../../api/app";
+import { organizeDataByCpf } from "../../utils/groupingdata";
+import { useSalesStore } from "../../store/vendaStore";
+import { LoadingScreen } from "../../components/Loading";
 
 type FormData = {
     romaneio: string;
@@ -19,14 +23,46 @@ export function HomePage() {
     const { handleSubmit, control, formState: { errors } } = useForm<FormData>();
     const [isInputFocused, setIsInputFocused] = useState<boolean>(false);
     const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>()
+    const { setSalesData } = useSalesStore(); 
+    const [isLoading, setIsLoading] = useState<boolean>(false); 
     
     const pesquisar = () => {
         navigation.navigate('Camera', { title: 'Scanear ' })
     }
 
+    const getDataRomaneio = async (codigo: FormData) => {
+        setIsLoading(true); 
+        try {
+            const response = await api.post("/entrega", {
+                app_id: "h2h12h1jkj436dsa008g0nvb7czx8dszx",
+                mode: "romaneio_oracle",
+                romaneio: codigo.romaneio,
+                empresa: "p",
+            });
+            
+            if (response.status === 202 && Array.isArray(response.data.data)) {
+                const organizedData = organizeDataByCpf(response.data.data);
+                setSalesData(organizedData);
+                navigation.navigate('Clientes')
+            } else {
+                console.error("Unexpected API response:", response);
+            }
+            
+        } catch (error) {
+            console.error("Erro ao buscar dados do romaneio:", error);
+        } finally {
+            setIsLoading(false); 
+        }
+    };
+
+
     const dismissKeyboard = () => {
         Keyboard.dismiss();
     };
+
+    if (isLoading) {
+        return <LoadingScreen />;
+    }
 
     return (
         <TouchableWithoutFeedback onPress={dismissKeyboard}>
@@ -73,7 +109,7 @@ export function HomePage() {
                                 start={{ x: 0, y: 2 }}
                                 end={{ x: 1, y: -2 }}
                                 style={styles.btnBuscar}>
-                                <Pressable onPress={handleSubmit(pesquisar)}>
+                                <Pressable onPress={handleSubmit(getDataRomaneio)}>
                                     <Text style={styles.textBuscar}>Buscar</Text>
                                 </Pressable>
                             </LinearGradient>

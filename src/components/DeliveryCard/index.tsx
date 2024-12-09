@@ -1,76 +1,88 @@
-import React from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient';
-import { styles } from './styles';
-import { useNavigation } from '@react-navigation/native';
-import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import type { RootStackParamList } from '../../routes/RootNavigator';
+import React from "react";
+import { Text, TouchableOpacity, View } from "react-native";
+import { LinearGradient } from "expo-linear-gradient";
+import { styles } from "./styles";
+import { useNavigation } from "@react-navigation/native";
+import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import type { RootStackParamList } from "../../routes/RootNavigator";
 
 interface DeliveryCardProps {
-    order: string;
+    deliveryOrder: number;
     status: string;
     clientName: string;
-    clientNeighborhood: string;
+    neighborhood: string;
 }
 
 export const DeliveryCard: React.FC<DeliveryCardProps> = ({
-    order,
+    deliveryOrder,
     status,
     clientName,
-    clientNeighborhood
+    neighborhood,
 }) => {
 
-    const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>()
+    const borderColor =
+        status === "T" ? "#1ced26" : status === "P" ? "#EFCD0F" : "N";
 
-    const borderColor = status === 'Entregue'
-        ? '#1ced26'
-        : status === 'Em trânsito'
-            ? '#EFCD0F'
-            : '#ED1C24';
+    let gradientColors: [string, string, string];
 
-    const backgroundColor = status === 'Entregue'
-        ? '#1ced26'
-        : status === 'Em trânsito'
-            ? '#EFCD0F'
-            : '#ED1C24';
+    if (status === "T") {
+        gradientColors = ['#1ced26', '#34C94A', '#0F8120']; // Cores verdes
+    } else if (status === "P") {
+        gradientColors = ['#EFCD0F', '#eecc0b', '#EA6C1E']; // Cores amarelas
+    } else {
+        gradientColors = ['#ED1C24', '#ec060e', '#760000']; // Cores vermelhas
+    }
+    const getStatusText = (status: string) => {
+        switch (status) {
+            case "T":
+                return "Entregue";
+            case "P":
+                return "Entrega Parcial";
+            case "N":
+                return "Não Entregue";
+            default:
+                return "Desconhecido";
+        }
+    };
 
-    const color = status === 'Entregue'
-        ? '#1ced26'
-        : status === 'Em trânsito'
-            ? '#EFCD0F'
-            : '#ED1C24';
-
-    const gradientColors = order === '1ª'
-        ? ['#1ced26', '#34C94A', '#0F8120']
-        : order === '2ª'
-            ? ['#EFCD0F', '#eecc0b', '#EA6C1E']
-            : ['#ED1C24', '#ec060e', '#760000'];
-
+    const getTextColor = (status: string): string => {
+        switch (status) {
+            case "T":
+                return "#0F8120";
+            case "P":
+                return "#EA6C1E";
+            case "N":
+                return "#ED1C24";
+            default:
+                return "#000000";
+        }
+    };
     return (
-        <TouchableOpacity onPress={() => navigation.navigate('Vendas')}>
             <LinearGradient
-                start={{ x: 0, y: 2 }}
+                start={{ x: 0, y: 0 }}
                 end={{ x: 1, y: 0 }}
                 colors={gradientColors}
-                style={[styles.cardInfo, { borderColor, backgroundColor }]}
+                style={[styles.cardInfo, { borderColor }]}
             >
                 <View style={styles.wrapperInfo}>
                     <View style={styles.ordem}>
                         <Text style={styles.entrega}>Ordem entrega</Text>
-                        <Text style={styles.entrega}>{order}</Text>
+                        <Text style={styles.entrega}>{deliveryOrder}</Text>
                     </View>
                     <View style={styles.status}>
-                        <Text style={[styles.textStatus]}>Status</Text>
+                        <Text style={styles.textStatus}>Status</Text>
                         <View style={styles.boxTagStatus}>
-                            <Text style={[styles.tagStatus, { color }]}>{status}</Text>
+
+                            <Text style={[styles.tagStatus, { color: getTextColor(status) }]}>
+                                {getStatusText(status)}
+                            </Text>
                         </View>
                     </View>
                     <View style={styles.clientInfo}>
                         <Text style={styles.clientText}>{clientName}</Text>
-                        <Text style={styles.clientBairro}>{clientNeighborhood}</Text>
+                        <Text style={styles.clientBairro}>{neighborhood}</Text>
                     </View>
                 </View>
             </LinearGradient>
-        </TouchableOpacity>
     );
 };

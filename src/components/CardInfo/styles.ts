@@ -1,13 +1,8 @@
 import { StyleSheet } from "react-native";
 
 export const styles = StyleSheet.create({
-    containerCardInfo: {
-      padding: 16,
-      backgroundColor: '#FFF4CC', 
-      borderRadius: 8,
-      margin: 8,
-    },
     cardInfo: {
+      padding: 16,
       flexDirection: 'column',
     },
     infoGrid: {
@@ -21,18 +16,19 @@ export const styles = StyleSheet.create({
       marginBottom: 4,
     },
     labelText: {
-      fontSize: 14,
+      fontSize: 16,
       fontWeight: 'bold',
       color: '#333',
     },
     valueText: {
       fontSize: 14,
+      marginLeft: 5,
       color: '#333',
       flexWrap: 'wrap',
       flex: 1,
     },
     addressText: {
-      fontSize: 14,
+      fontSize: 18,
       fontWeight: 'bold',
       color: '#333',
       textAlign: 'center',
@@ -41,7 +37,12 @@ export const styles = StyleSheet.create({
     complementRow: {
       flexDirection: 'row',
       justifyContent: 'space-between',
-      marginBottom: 12,
+    },
+    containerCardInfo: {
+      
+      backgroundColor: 'rgba(255, 251, 235, 1)', 
+      borderRadius: 8,
+      margin: 8,
     },
     actionButtonsContainer: {
       alignItems: 'center',
@@ -50,24 +51,25 @@ export const styles = StyleSheet.create({
     actionButton: {
       width: '100%',
       paddingVertical: 12,
-      backgroundColor: '#FFF',
       borderRadius: 8,
       alignItems: 'center',
       marginVertical: 4,
-      shadowColor: '#000',
+      shadowColor: '#f2f2ff',
       shadowOpacity: 0.1,
       shadowOffset: { width: 0, height: 1 },
     },
     actionButtonText: {
       fontSize: 16,
-      fontWeight: 'bold',
-      color: '#666',
+      fontWeight: '500',
+      color: '#fff', 
     },
     iconsContainer: {
       flexDirection: 'row',
       justifyContent: 'space-around',
       alignItems: 'center',
-      paddingVertical: 8,
+      paddingVertical: 10,
+      marginBottom: 10,
+      marginTop: -10
     },
     iconButton: {
       alignItems: 'center',

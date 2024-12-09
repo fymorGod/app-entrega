@@ -5,13 +5,15 @@ import { Camera } from "../components/Camera";
 import { ClientePage } from "../pages/Clientes";
 import { Requisições } from "../pages/Requisições";
 import { Vendas } from "../pages/Vendas";
+import { ImageGallery } from "../pages/Galeria";
 
 export type RootStackParamList = {
     Home: undefined;
     Clientes: undefined;
     Camera: { title: string }; 
     Requisicoes: undefined;
-    Vendas: undefined;
+    Vendas: { cpf: string };
+    Galeria: undefined;
 };
 
 export const RootNavigator = () => {
@@ -23,6 +25,7 @@ export const RootNavigator = () => {
             <Stack.Screen name="Clientes" component={ClientePage} options={{ headerShown: false, animation: 'slide_from_right'}} />
             <Stack.Screen name="Requisicoes"  component={Requisições} options={{ headerShown: false, animation: 'slide_from_right'}} />
             <Stack.Screen name="Vendas" component={Vendas} options={{ headerShown: false, animation: 'slide_from_right'}} />
+            <Stack.Screen name="Galeria" component={ImageGallery} options={{ headerShown: false, animation: 'slide_from_right'}} />
             <Stack.Screen name="Camera" component={Camera} options={{ headerShown: false, animation: 'slide_from_right'}} initialParams={{ title: 'Escaneie o código' }}/>
         </Stack.Navigator>
     )
