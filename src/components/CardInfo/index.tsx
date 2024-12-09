@@ -9,7 +9,6 @@ import { useNavigation } from '@react-navigation/native';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import type { RootStackParamList } from '../../routes/RootNavigator';
 
-// Tipagem correta para as propriedades esperadas
 type CardInfoProps = {
   status?: string;
   romaneio?: string;
@@ -26,7 +25,11 @@ const buttonGradients = {
   'Não Entregue': ['#ED1C24', '#ec060e', '#760000'] as const,
   default: ['#f2f2f2', '#e0e0e0', '#d0d0d0'] as const,
 };
-
+const statusMap: Record<string, string> = {
+    T: 'Entregue',
+    P: 'Entregue Parcial',
+    N: 'Não Entregue',
+  };
 export const CardInfo: React.FC<CardInfoProps> = ({
   status,
   romaneio,
@@ -37,12 +40,12 @@ export const CardInfo: React.FC<CardInfoProps> = ({
   delivery_type,
 }) => {
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
-
+  const statusText = status ? statusMap[status] : undefined;
   return (
     <Animated.View entering={FadeInLeft.delay(300)} style={styles.containerCardInfo}>
-      {/* Informações principais */}
+
       <View style={styles.cardInfo}>
-        {/* Informações no formato Grid */}
+
         <View style={styles.infoGrid}>
           <View style={styles.infoColumn}>
             <Text style={styles.labelText}>Romaneio</Text>
@@ -66,7 +69,6 @@ export const CardInfo: React.FC<CardInfoProps> = ({
           {delivery_type || 'N/A'}
         </Text>
 
-        {/* Complemento para preço */}
         <View style={styles.complementRow}>
           <Text style={styles.labelText}>Preço de entrega</Text>
           <Text style={styles.valueText}>
@@ -74,10 +76,10 @@ export const CardInfo: React.FC<CardInfoProps> = ({
           </Text>
         </View>
 
-        {/* Botões com base no status */}
+
         <View style={styles.actionButtonsContainer}>
-          {(['Entregue', 'Entregue Parcial', 'Não Entregue'] as const).map((buttonText) => {
-            const isActive = status === buttonText;
+        {(['Entregue', 'Entregue Parcial', 'Não Entregue'] as const).map((buttonText) => {
+            const isActive = statusText === buttonText;
             const colors = isActive ? buttonGradients[buttonText] : buttonGradients.default;
 
             return (
@@ -98,7 +100,6 @@ export const CardInfo: React.FC<CardInfoProps> = ({
 
         <Divider />
 
-        {/* Container de ações para localização e fotos */}
         <View style={styles.iconsContainer}>
           <TouchableOpacity style={styles.iconButton} onPress={() => navigation.navigate('Galeria')}>
             <Icon name="photo-library" size={24} color="red" />
